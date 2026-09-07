@@ -7,87 +7,48 @@
 
 <body>
 
-  <h1>Hi, I'm Shikha!</h1>
+  <main class="welcome-layout">
+    <section class="welcome-content">
+      <h1>Hi, I'm Shikha!</h1>
 
-  <img src="shikha.jpeg" alt="Shikha" width="300">
-
-  <p>Welcome to my website. Thanks for visiting my website!</p>
-
-  <p>This app is all about my chores,how much money I have,and how much my parents owe me!</p>
-
-  <div style="display: flex; gap: 20px;">
-    <!-- ADD SIDE -->>
-    <div style="flex: 1;">
-      <div>
-        Unload Dishwasher ($2.00)
-        <button type="button">Add</button>
+      <div class="welcome-row">
+        <img src="shikha.jpeg" alt="Shikha" width="300">
+        <iframe class="login-frame" src="login.html" title="Login" scrolling="no"></iframe>
       </div>
 
-      <div>
-        Clean table ($2.00)
-        <button type="button">Add</button>
-      </div>
-      <div>
-        Take package ($1.00)
-        <button type="button">Add</button>
-      </div>
-      <div>
-        Finish one math worksheet ($5.00)
-        <button type="button">Add</button>
-      </div>
-      <div>
-        Finish one book ($3.00)
-        <button type="button">Add</button>
-      </div>
-      <div>
-        Load dishwasher ($2.00) <button type="button">Add</button>
-      </div>
-      <div>Take out garbage ($2.00)
-        <button type="button">Add</button>
-      </div>
+      <p>Welcome to my website. Thanks for visiting my website!</p>
 
-      <div>
-        Skip tab for one day ($5.00)
-        <button type="button">Add</button>
-      </div>
-      <div>
-        Taekwondo promotion ($20.00)
-        <button type="button">Add</button>
-      </div>
-    </div>
+      <p>This app is all about my chores,how much money I have,and how much my parents owe me!</p>
 
-    <div style="border-left: 2px solid #999;"></div>
+      <p><a href="chores/index.html">Open Chores App</a></p>
+    </section>
+  </main>
 
-    <div style="flex: 1;">
-      <div>
-        Not Respecting Parents (-$5.00)
-        <button type="button">Subtract</button>
-      </div>
+  <style>
+    .welcome-row {
+      display: flex;
+      align-items: flex-start;
+      gap: 48px;
+    }
 
-      <div> Talk back to parents (-$2.00)
-        <button type="button">Subtract </button>
-      </div>
-      <div>
-        Say mean things (-$5.00)
-        <button type="button">Subtract</button>
-      </div>
-      <div>
-        Not acknowlegding (-$2.00)
-        <button type="button">Subtract</button>
-      </div>
-      <div>
-        Not drinking water (-$2.00)
-        <button type="button">Subtract</button>
-      </div>
-      <div>
-        Going over time limit (-$2.00)
-        <button type="button">Subtract</button>
-      </div>
+    .welcome-content {
+      max-width: 100%;
+    }
 
-    </div>
+    .login-frame {
+      flex: 0 0 320px;
+      width: 320px;
+      height: 230px;
+      border: 1px solid #ccc;
+      overflow: hidden;
+    }
 
-
-  </div>
+    @media (max-width: 700px) {
+      .welcome-row {
+        flex-direction: column;
+      }
+    }
+  </style>
 </body>
 
 </html>
