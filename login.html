@@ -29,7 +29,11 @@
     const username = document.querySelector('#username');
     const password = document.querySelector('#password');
     const message = document.querySelector('#login-message');
-    const allowedUsernames = ['dukku', 'srijitha', 'rajesh'];
+    const validCredentials = {
+      dukku: '#BigSis',
+      srijitha: '1',
+      rajesh: '1'
+    };
 
     if (!username.value.trim() || !password.value.trim()) {
       message.textContent = 'Please enter both a username and a password.';
@@ -37,8 +41,10 @@
       return;
     }
 
-    if (!allowedUsernames.includes(username.value.trim().toLowerCase())) {
-      message.textContent = 'That username is not allowed.';
+    const usernameKey = username.value.trim().toLowerCase();
+
+    if (validCredentials[usernameKey] !== password.value.trim()) {
+      message.textContent = 'The username or password is incorrect.';
       username.focus();
       return;
     }
