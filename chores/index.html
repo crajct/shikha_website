@@ -11,6 +11,8 @@
       --text-color: #465d68;
       --add-color: #59e7ae;
       --subtract-color: #e69ed1;
+      --withdraw-button-color: #848686db;
+      --withdraw-text-color: #f4f5f4;
       --space: 16px;
     }
 
@@ -91,6 +93,37 @@
     .balance-amount {
       font-size: 32px;
       font-weight: bold;
+    }
+
+    #withdraw-button {
+      margin-left: 12px;
+      background-color: var(--withdraw-button-color);
+      color: var(--withdraw-text-color);
+    }
+
+    dialog {
+      padding: 24px;
+      border: 0;
+      border-radius: 12px;
+      color: var(--text-color);
+    }
+
+    dialog::backdrop {
+      background-color: rgba(0, 0, 0, 0.4);
+    }
+
+    .withdraw-form {
+      display: grid;
+      gap: 12px;
+    }
+
+    .withdraw-actions {
+      display: flex;
+      gap: 8px;
+    }
+
+    .cancel-button {
+      background-color: #777;
     }
 
     @media (max-width: 700px) {
@@ -186,9 +219,22 @@
       <h1>My balance</h1>
       <div class="chore-item">
         <span class="balance-amount" id="balance">$0.00</span>
+        <button type="button" id="withdraw-button">Withdraw</button>
       </div>
     </div>
   </div>
+
+  <dialog id="withdraw-dialog">
+    <form class="withdraw-form" id="withdraw-form">
+      <h2>Withdraw money</h2>
+      <label for="withdraw-amount">How much would you like to withdraw?</label>
+      <input id="withdraw-amount" name="withdraw-amount" type="number" min="0.01" step="0.01" required>
+      <div class="withdraw-actions">
+        <button class="cancel-button" type="button" id="cancel-withdraw">Cancel</button>
+        <button type="submit">Withdraw</button>
+      </div>
+    </form>
+  </dialog>
 
   <script>
     const balanceStorageKey = 'chores-balance';
@@ -218,7 +264,41 @@
         displayBalance();
       });
     });
+
+    const withdrawButton = document.querySelector('#withdraw-button');
+    const withdrawDialog = document.querySelector('#withdraw-dialog');
+    const withdrawForm = document.querySelector('#withdraw-form');
+    const withdrawAmount = document.querySelector('#withdraw-amount');
+    const cancelWithdraw = document.querySelector('#cancel-withdraw');
+
+    withdrawButton.addEventListener('click', function () {
+      if (balance < 0) {
+        return;
+      }
+
+      withdrawDialog.showModal();
+      withdrawAmount.focus();
+    });
+
+    cancelWithdraw.addEventListener('click', function () {
+      withdrawDialog.close();
+    });
+
+    withdrawForm.addEventListener('submit', function (event) {
+      event.preventDefault();
+      const amount = Number(withdrawAmount.value);
+
+      if (amount > balance) {
+        alert('You cannot withdraw more than your balance.');
+        return;
+      }
+
+      balance -= amount;
+      localStorage.setItem(balanceStorageKey, balance.toString());
+      displayBalance();
+      withdrawForm.reset();
+      withdrawDialog.close();
+    });
   </script>
 </body>
-
 </html>
