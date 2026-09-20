@@ -29,10 +29,17 @@
     const username = document.querySelector('#username');
     const password = document.querySelector('#password');
     const message = document.querySelector('#login-message');
+    const allowedUsernames = ['Dukku', 'Srijitha', 'Rajesh'];
 
     if (!username.value.trim() || !password.value.trim()) {
       message.textContent = 'Please enter both a username and a password.';
       (!username.value.trim() ? username : password).focus();
+      return;
+    }
+
+    if (!allowedUsernames.includes(username.value.trim())) {
+      message.textContent = 'That username is not allowed.';
+      username.focus();
       return;
     }
 
